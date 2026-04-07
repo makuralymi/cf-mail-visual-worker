@@ -1,0 +1,10 @@
+node_modules/
+.wrangler/
+
+# Local/personal configuration (contains namespace ids)
+wrangler.toml
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db

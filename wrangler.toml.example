@@ -1,0 +1,16 @@
+name = "cf-mail-visual-worker"
+main = "src/worker.js"
+compatibility_date = "2026-04-07"
+
+[observability]
+enabled = true
+
+[[kv_namespaces]]
+binding = "MAIL_KV"
+id = "REPLACE_WITH_MAIL_KV_ID"
+preview_id = "REPLACE_WITH_MAIL_KV_PREVIEW_ID"
+
+[[kv_namespaces]]
+binding = "AUTH_KV"
+id = "REPLACE_WITH_AUTH_KV_ID"
+preview_id = "REPLACE_WITH_AUTH_KV_PREVIEW_ID"
