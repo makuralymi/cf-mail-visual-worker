@@ -1,0 +1,398 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap');
+
+  /* 主题变量 */
+    :root {
+      --paper: #ece7db;
+      --wash: #dde4dd;
+      --pond: #9eb4b0;
+      --reed: #7f938d;
+      --iris: #b7a3b5;
+      --rose-dust: #c9a89c;
+      --ink: #2d3a37;
+      --muted: #5d6f6a;
+      --card: rgba(245, 241, 232, 0.82);
+      --card-border: rgba(121, 143, 136, 0.4);
+      --accent: #6d8880;
+      --accent-soft: #94aba5;
+      --danger: #b46f66;
+      --ok: #5f8574;
+      --shadow: 0 20px 48px rgba(67, 84, 78, 0.18);
+    }
+
+    /* 全局与背景层 */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Noto Serif SC", "PingFang SC", "Microsoft YaHei", serif;
+      color: var(--ink);
+      background-color: var(--paper);
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      border-radius: 999px;
+      filter: blur(54px);
+      pointer-events: none;
+      z-index: -2;
+      opacity: 0.34;
+      animation: drift 14s ease-in-out infinite;
+    }
+
+    body::before {
+      width: 42vw;
+      height: 42vw;
+      left: -12vw;
+      top: -10vw;
+      background-color: var(--pond);
+    }
+
+    body::after {
+      width: 36vw;
+      height: 36vw;
+      right: -8vw;
+      bottom: -10vw;
+      background-color: var(--iris);
+      animation-delay: -5s;
+    }
+
+    #particles {
+      /* 粒子动画固定在最底层 */
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    /* 版心与顶部工具区 */
+    .wrap {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 24px 16px 32px;
+    }
+
+    .top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      animation: fadeUp .7s ease;
+    }
+
+    .title {
+      /* 标题字体与层次感 */
+      font-size: clamp(1.25rem, 2.5vw, 2.1rem);
+      font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin: 0;
+      color: #344642;
+      text-shadow: 0 3px 14px rgba(115, 136, 130, 0.22);
+    }
+
+    .account-tools {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .account-select {
+      /* 账户选择器保持与整体配色一致 */
+      min-width: 220px;
+      max-width: 300px;
+      border-radius: 10px;
+      border: 1px solid rgba(117, 139, 132, 0.45);
+      background: rgba(244, 240, 230, 0.9);
+      color: var(--ink);
+      padding: 9px 10px;
+    }
+
+    /* 控件基础样式 */
+    input {
+      width: 100%;
+      border: 1px solid rgba(117, 139, 132, 0.45);
+      background: rgba(244, 240, 230, 0.88);
+      color: var(--ink);
+      border-radius: 10px;
+      padding: 10px 12px;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: #7a8d86;
+    }
+
+    input:focus {
+      border-color: rgba(111, 137, 129, 0.85);
+      box-shadow: 0 0 0 3px rgba(159, 182, 174, 0.28);
+    }
+
+    button {
+      /* 主按钮：带轻微浮起感 */
+      border: 1px solid rgba(89, 117, 109, 0.65);
+      border-radius: 10px;
+      color: #f5f4ee;
+      background: var(--accent);
+      font-weight: 700;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+      box-shadow: 0 8px 16px rgba(94, 120, 112, 0.24);
+      white-space: nowrap;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      background: #5c786f;
+    }
+
+    .btn-secondary {
+      /* 次按钮：弱化视觉权重 */
+      background: rgba(214, 201, 188, 0.68);
+      color: #445650;
+      box-shadow: none;
+      border: 1px solid rgba(126, 108, 99, 0.4);
+    }
+
+    /* 主布局：列表与详情 */
+    .grid {
+      display: grid;
+      grid-template-columns: 370px 1fr;
+      gap: 14px;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      animation: fadeUp .8s ease;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border-bottom: 1px solid rgba(116, 140, 132, 0.24);
+      background: rgba(222, 230, 223, 0.66);
+    }
+
+    .list {
+      max-height: 68vh;
+      overflow: auto;
+      padding: 8px;
+    }
+
+    .item {
+      border: 1px solid rgba(135, 153, 147, 0.24);
+      border-radius: 12px;
+      padding: 10px;
+      margin: 8px 2px;
+      background: rgba(241, 237, 228, 0.82);
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .item:hover, .item.active {
+      /* hover/active 强化当前项识别 */
+      border-color: rgba(103, 130, 123, 0.72);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(126, 148, 141, 0.22);
+    }
+
+    .subject {
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .meta, .preview {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.35;
+      word-break: break-word;
+    }
+
+    .mail-body {
+      /* 详情区域支持长内容滚动 */
+      padding: 14px;
+      min-height: 360px;
+      max-height: 72vh;
+      overflow: auto;
+    }
+
+    .mail-top {
+      padding-bottom: 12px;
+      border-bottom: 1px dashed rgba(116, 138, 132, 0.44);
+      margin-bottom: 12px;
+    }
+
+    .content {
+      white-space: pre-wrap;
+      line-height: 1.5;
+      color: #32443f;
+      font-size: 0.95rem;
+    }
+
+    .empty {
+      padding: 28px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    /* 状态与账户弹窗 */
+    .status {
+      margin-top: 8px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      min-height: 1.2em;
+    }
+
+    .status.ok {
+      color: var(--ok);
+    }
+
+    .status.err {
+      color: var(--danger);
+    }
+
+    .token-modal {
+      /* 弹窗遮罩层 */
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      padding: 16px;
+      background: rgba(74, 87, 82, 0.38);
+      backdrop-filter: blur(3px);
+    }
+
+    .token-modal.show {
+      display: flex;
+      animation: fadeUp .25s ease;
+    }
+
+    .token-modal-card {
+      /* 弹窗主体容器 */
+      width: min(92vw, 440px);
+      background: rgba(245, 241, 232, 0.95);
+      border: 1px solid rgba(121, 143, 136, 0.5);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+
+    .token-modal-title {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #2f443e;
+    }
+
+    .token-modal-desc {
+      margin: 8px 0 12px;
+      font-size: 0.9rem;
+      color: #5b6e68;
+      line-height: 1.45;
+    }
+
+    .token-modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .account-list {
+      max-height: 180px;
+      overflow: auto;
+      margin: 10px 0;
+      padding-right: 2px;
+    }
+
+    .account-row {
+      /* 单个账户项 */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 10px;
+      border: 1px solid rgba(129, 150, 143, 0.34);
+      border-radius: 10px;
+      background: rgba(243, 239, 231, 0.75);
+      margin-bottom: 8px;
+    }
+
+    .account-row-main {
+      min-width: 0;
+    }
+
+    .account-name {
+      color: #314641;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .account-email {
+      color: #60736d;
+      font-size: 0.82rem;
+      word-break: break-all;
+    }
+
+    .account-form {
+      border-top: 1px dashed rgba(116, 138, 132, 0.44);
+      padding-top: 12px;
+      margin-top: 12px;
+    }
+
+    .account-form-title {
+      color: #395149;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    .account-form-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    /* 响应式与动效 */
+    @media (max-width: 960px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .list {
+        max-height: 42vh;
+      }
+      .mail-body {
+        max-height: none;
+      }
+    }
+
+    @keyframes fadeUp {
+      /* 面板入场动画 */
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes drift {
+      /* 背景光斑缓慢漂移 */
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      50% { transform: translate3d(10px, -14px, 0); }
+    }
