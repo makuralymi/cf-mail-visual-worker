@@ -1,5 +1,3 @@
-import { renderAppHtml } from "./appHtml.js";
-
 const MAX_BODY_PREVIEW = 400;
 const MAX_BODY_STORED = 50000;
 const SESSION_TTL_SECONDS = 60 * 60 * 24 * 7;

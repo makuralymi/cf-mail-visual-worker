@@ -14,3 +14,8 @@ preview_id = "REPLACE_WITH_MAIL_KV_PREVIEW_ID"
 binding = "AUTH_KV"
 id = "REPLACE_WITH_AUTH_KV_ID"
 preview_id = "REPLACE_WITH_AUTH_KV_PREVIEW_ID"
+
+
+[assets]
+binding": "ASSETS",
+directory": "./frontend/public"
