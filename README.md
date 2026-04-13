@@ -1,5 +1,6 @@
 # Cloudflare 可视化邮箱 Worker
 
+AI写的自用，能用但不适合继续优化。
 一个可直接部署到 Cloudflare Workers 的邮件接收可视化页面：
 
 - 使用 Cloudflare Email Routing + Email Worker 接收邮件
